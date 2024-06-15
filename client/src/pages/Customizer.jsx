@@ -26,6 +26,7 @@ const Customizer = () => {
   const [text, setText] = useState("");
   const [font, setFont] = useState("Arial");
   const [fontSize, setFontSize] = useState(30);
+  const [textColor, setTextColor] = useState("#000000");
 
   const [activeEditorTab, setActiveEditorTab] = useState("");
   const [activeFilterTab, setActiveFilterTab] = useState({
@@ -47,7 +48,10 @@ const Customizer = () => {
             setText={setText}
             font={font}
             setFont={setFont}
+            fontSize={fontSize}
             setFontSize={setFontSize}
+            textColor={textColor}
+            setTextColor={setTextColor}
             readText={readText}
           />
         );
@@ -104,8 +108,8 @@ const Customizer = () => {
     });
   };
 
-  const readText = () => {
-    const textTexture = createTextTexture(text, font, fontSize);
+  const readText = (text, font, fontSize, textColor) => {
+    const textTexture = createTextTexture(text, font, fontSize, textColor);
     state.textDecal = textTexture;
     state.isLogoTexture = false;
     state.isFullTexture = false;
@@ -162,7 +166,7 @@ const Customizer = () => {
               />
             ))}
 
-            <Tab 
+            <Tab
               tab={{ name: "download", icon: download }}
               isFilterTab
               handleClick={() => handleActiveFilterTab("download")}

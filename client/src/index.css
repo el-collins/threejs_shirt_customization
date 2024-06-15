@@ -56,7 +56,7 @@ html {
 }
 
 .textpicker-container {
-  @apply absolute left-full ml-3 glassmorphism p-3 w-[195px] h-[260px] flex flex-col rounded-md;
+  @apply absolute left-full ml-3 glassmorphism p-3 w-[195px] h-[300px] flex flex-col rounded-md;
 }
 
 .filepicker-label {

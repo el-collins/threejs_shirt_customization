@@ -13,7 +13,6 @@ const Shirt = () => {
 
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
-  // const textTexture = useTexture(createTextTexture(snap.textDecal));
   const textTexture = useTexture(snap.textDecal);
 
   useFrame((state, delta) =>

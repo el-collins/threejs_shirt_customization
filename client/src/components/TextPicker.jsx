@@ -6,8 +6,10 @@ const TextPicker = ({
   setText,
   font,
   setFont,
-  fontSize =30,
+  fontSize,
   setFontSize,
+  textColor,
+  setTextColor,
   readText,
 }) => {
   const fonts = [
@@ -40,6 +42,15 @@ const TextPicker = ({
           className="textpicker-input"
         />
 
+        <input
+          type="color"
+          value={textColor}
+          onChange={(e) => setTextColor(e.target.value)}
+          className="p-1 h-10 w-14 block bg-transparent border border-gray-200 cursor-pointer rounded-lg disabled:opacity-50 disabled:pointer-events-none"
+          id="hs-color-input"
+          title="Choose your color"
+        />
+
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -55,7 +66,7 @@ const TextPicker = ({
         <CustomButton
           type="filled"
           title="Write"
-          handleClick={() => readText(text, font, fontSize)}
+          handleClick={() => readText(text, font, fontSize, textColor)}
           customStyles="text-xs mt-2"
           disabled={!text.trim()}
         />

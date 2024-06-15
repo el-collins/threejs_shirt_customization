@@ -88,7 +88,7 @@ export const getContrastingColor = (color) => {
 //   return dataURL;
 // };
 
-export const createTextTexture = (text, font, fontSize) => {
+export const createTextTexture = (text, font, fontSize, textColor) => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
@@ -97,7 +97,7 @@ export const createTextTexture = (text, font, fontSize) => {
 
   // Set your text properties
   context.font = `${fontSize}px ${font}`;
-  context.fillStyle = "black";
+  context.fillStyle = textColor;
   context.textAlign = "center";
   context.textBaseline = "middle";
 
