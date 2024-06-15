@@ -4,7 +4,11 @@ import { useSnapshot } from "valtio";
 
 import state from "../store";
 import { download } from "../assets"; //download.png
-import { downloadCanvasToImage, reader } from "../config/helpers";
+import {
+  createTextTexture,
+  downloadCanvasToImage,
+  reader,
+} from "../config/helpers";
 import { EditorTabs, FilterTabs, DecalTypes } from "../config/constants";
 import { fadeAnimation, slideAnimation } from "../config/motion";
 import {
@@ -21,6 +25,7 @@ const Customizer = () => {
   const [file, setFile] = useState("");
   const [text, setText] = useState("");
   const [font, setFont] = useState("Arial");
+  const [fontSize, setFontSize] = useState(30);
 
   const [activeEditorTab, setActiveEditorTab] = useState("");
   const [activeFilterTab, setActiveFilterTab] = useState({
@@ -42,6 +47,8 @@ const Customizer = () => {
             setText={setText}
             font={font}
             setFont={setFont}
+            setFontSize={setFontSize}
+            readText={readText}
           />
         );
       default:
@@ -53,14 +60,19 @@ const Customizer = () => {
     switch (tabName) {
       case "logoShirt":
         state.isLogoTexture = !activeFilterTab[tabName];
+        state.isTextTexture = false;
         break;
       case "stylishShirt":
         state.isFullTexture = !activeFilterTab[tabName];
+        state.isTextTexture = false;
         break;
       case "download":
         downloadCanvasToImage();
         break;
       default:
+        state.isLogoTexture = true;
+        state.isFullTexture = false;
+        state.isTextTexture = false;
         break;
     }
 
@@ -88,7 +100,17 @@ const Customizer = () => {
     reader(file).then((result) => {
       handleDecals(type, result);
       setActiveEditorTab("");
+      state.isTextTexture = false;
     });
+  };
+
+  const readText = () => {
+    const textTexture = createTextTexture(text, font, fontSize);
+    state.textDecal = textTexture;
+    state.isLogoTexture = false;
+    state.isFullTexture = false;
+    state.isTextTexture = true;
+    setActiveEditorTab("");
   };
 
   return (
@@ -140,7 +162,7 @@ const Customizer = () => {
               />
             ))}
 
-            <Tab
+            <Tab 
               tab={{ name: "download", icon: download }}
               isFilterTab
               handleClick={() => handleActiveFilterTab("download")}
