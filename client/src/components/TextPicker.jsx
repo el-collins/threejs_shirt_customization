@@ -1,5 +1,6 @@
 import React from "react";
 import CustomButton from "./CustomButton";
+import { fonts } from "./fonts"
 
 const TextPicker = ({
   text,
@@ -12,13 +13,7 @@ const TextPicker = ({
   setTextColor,
   readText,
 }) => {
-  const fonts = [
-    "Arial",
-    "Verdana",
-    "Times New Roman",
-    "Courier New",
-    "Georgia",
-  ];
+
 
   return (
     <div className="textpicker-container">
